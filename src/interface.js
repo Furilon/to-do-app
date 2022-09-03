@@ -60,28 +60,29 @@ const Todo = (() => {
     const makeProject = () => {
         // Make a project internally
         projectForm(() => {
-            const projectTitle = document.querySelector('.projectTitle').value;
+            const projectTitle = document.querySelector('#projectTitle').value;
             const project = projectFactory(projectTitle)
             _projectList.push(project)
+            
+            // Make all projects inactive
+            const projects = document.querySelectorAll('.project')
+            projects.forEach((proj) => proj.classList.remove('active'))
+    
+            // Figure out project's id and make a project DOM
+            const projContainer = document.getElementById('projects')
+            let projID = 0
+            if (projContainer.lastChild) {
+                projID = +projContainer.lastChild.dataset.index + 1
+            }
+            const projElem = projectDOM.createProject(project, projID)
+            projElem.classList.add('active')
+            projElem.addEventListener('click', makeProjectActive)
+            projContainer.appendChild(projElem)
+    
+            // Delete items from prev proj
+            _deleteItems()
         })
 
-        // Make all projects inactive
-        const projects = document.querySelectorAll('.project')
-        projects.forEach((proj) => proj.classList.remove('active'))
-
-        // Figure out project's id and make a project DOM
-        const projContainer = document.getElementById('projects')
-        let projID = 0
-        if (projContainer.lastChild) {
-            projID = +projContainer.lastChild.dataset.index + 1
-        }
-        const projElem = projectDOM.createProject(project, projID)
-        projElem.classList.add('active')
-        projElem.addEventListener('click', makeProjectActive)
-        projContainer.appendChild(projElem)
-
-        // Delete items from prev proj
-        _deleteItems()
     }
 
     const removeProject = () => {
@@ -158,27 +159,28 @@ const Todo = (() => {
 
         // Ask user about item's props
         itemForm(() => {
-            const itemTitle = document.querySelector('.itemTitle').value;
-            const itemDescription = document.querySelector('.itemDescription').value;
-            const itemDue = document.querySelector('.itemDue').value;
-            const itemPriority = document.querySelector('.itemPriority').value;
+            const title = document.querySelector('#itemTitle').value;
+            const description = document.querySelector('#itemDescription').value;
+            const dueDate = document.querySelector('#itemDue').value;
+            const priority = document.querySelector('#itemPriority').value;
 
             // Make an item and add it to the project
             const item = itemFactory(title, description, dueDate, priority)
             project.addItem(item)
+            
+            // Make item's DOM elem and add it to the page
+            // Use last item's id + 1 as this new item's id
+            const itemContainer = document.getElementById('todos')
+            let itemID = 0
+            if (itemContainer.lastChild) {
+                itemID = itemContainer.lastChild.id + 1
+            }
+            const itemElem = itemDOM.createItem(item, itemID)
+            itemElem.lastChild.addEventListener('click', removeItem)
+            itemContainer.appendChild(itemElem)
         })
 
 
-        // Make item's DOM elem and add it to the page
-        // Use last item's id + 1 as this new item's id
-        const itemContainer = document.getElementById('todos')
-        let itemID = 0
-        if (itemContainer.lastChild) {
-            itemID = itemContainer.lastChild.id + 1
-        }
-        const itemElem = itemDOM.createItem(item, itemID)
-        itemElem.lastChild.addEventListener('click', removeItem)
-        itemContainer.appendChild(itemElem)
     }
 
     return {

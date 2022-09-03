@@ -27,7 +27,8 @@ export const projectForm = (addProject) => {
         addProject()
         
         // remove the form from the screen
-        document.removeChild(e.parentNode.parentNode)
+        const body = document.querySelector('body')
+        body.removeChild(e.target.parentNode.parentNode)
     })
 
     form.appendChild(title)
@@ -36,7 +37,8 @@ export const projectForm = (addProject) => {
     container.appendChild(formTitle)
     container.appendChild(form)
 
-    document.appendChild(container);
+    const body = document.querySelector('body')
+    body.appendChild(container)
 }
 
 
@@ -89,7 +91,8 @@ export const itemForm = (addItem) => {
         addItem()
         
         // remove the form from the screen
-        document.removeChild(e.parentNode.parentNode)
+        const body = document.querySelector('body')
+        body.removeChild(e.target.parentNode.parentNode)
     })
 
     form.appendChild(title)
@@ -101,5 +104,6 @@ export const itemForm = (addItem) => {
     container.appendChild(formTitle)
     container.appendChild(form)
 
-    document.appendChild(container);
+    const body = document.querySelector('body')
+    body.appendChild(container)
 }
