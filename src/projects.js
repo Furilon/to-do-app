@@ -2,26 +2,11 @@ const projectFactory = (name) => {
     const _name = name;
     const _itemList = [];
 
-    // storing projects locally
-    const storageObject = {[_name]: _itemList}
-    localStorage.setItem(JSON.stringify(storageObject))
-
     const getName = () => _name;
-    const setName = (newName) => {
-        // remove the old item
-        localStorage.removeItem(_name)
-
-        // set new item with the new name 
-        _name = newName
-        const newStorageObject = {[_name]: _itemList}
-        localStorage.setItem(JSON.stringify(newStorageObject))
-    };
+    const setName = (newName) => _name = newName;
 
     const getItems = () => _itemList;
-    const addItem = (item) => {
-        _itemList.push(item)
-        //
-    };
+    const addItem = (item) => _itemList.push(item);
     const removeItem = (position) => _itemList.splice(position, 1);
 
     return { getName, setName, getItems, addItem, removeItem }
@@ -51,15 +36,3 @@ const projectDOM = (() => {
 })();
 
 export { projectFactory, projectDOM };
-
-
-/*
-    1. Create a localStorage object upon creating a project
-    2. If you want to rename the proj, remove it from localStorage
-        and add a new object
-    3. To get items, getItem() from the localStorage 
-        and JSON.parse it
-    4. To add items, getItem() -> JSON.parse() -> array.push(obj) 
-        -> JSON.stringify(obj) -> localStorage.setItem(newObj)
-    5. To remove items, same thing as in (4) but array.splice(obj, 1)
-*/
