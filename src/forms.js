@@ -1,4 +1,4 @@
-export const projectForm = (addProject) => {
+export const createProjectForm = (addProject) => {
     
     // create a form container
     const container = document.createElement('div')
@@ -42,7 +42,7 @@ export const projectForm = (addProject) => {
 }
 
 
-export const itemForm = (addItem) => {
+export const createItemForm = (addItem) => {
     
     // create the form container
     const container = document.createElement('div')

@@ -1,6 +1,6 @@
 import { itemFactory, itemDOM } from './items'
 import { projectFactory, projectDOM } from './projects'
-import { projectForm, itemForm } from "./forms"
+import { createProjectForm, createItemForm } from "./forms"
 
 const Todo = (() => {
     const defaultProject = projectFactory('Default')
@@ -59,7 +59,7 @@ const Todo = (() => {
 
     const makeProject = () => {
         // Make a project internally
-        projectForm(() => {
+        createProjectForm(() => {
             const projectTitle = document.querySelector('#projectTitle').value;
             const project = projectFactory(projectTitle)
             _projectList.push(project)
@@ -158,7 +158,7 @@ const Todo = (() => {
         const project = _projectList[projID]
 
         // Ask user about item's props
-        itemForm(() => {
+        createItemForm(() => {
             const title = document.querySelector('#itemTitle').value;
             const description = document.querySelector('#itemDescription').value;
             const dueDate = document.querySelector('#itemDue').value;
@@ -195,8 +195,6 @@ const Todo = (() => {
 
 export default Todo
 
-// Ok, there's a lot to say.
-
 // First of all, I have a lot of repetitive code.
 // Almost all of the functions have parts that repeat each other.
 // That is easily fixable.
@@ -206,13 +204,19 @@ export default Todo
 // Fifthly, it would be nice to be able to edit your projects and items.
 
 /* Store projects in localStorage
-    1. Store array of project objects in localStorage (proj_id: proj_obj)
-    2. To access a project, localStorage.getItem(proj_id)
-    3. To delete a project, localStorage.removeItem(proj_id)
-    4. To show projects, Object.keys(localStorage).forEach(func)
+        1. Store array of project objects in localStorage (proj_id: proj_obj)
+        2. To access a project, localStorage.getItem(proj_id)
+        3. To delete a project, localStorage.removeItem(proj_id)
+        4. To show projects, Object.keys(localStorage).forEach(func)
 
-    5. To add/edit an item, localStorage.getItem() -> JSON.parse()
-        -> project.addItem() -> json.stringify -> .setItem()
-    6. To remove an item, localStorage.getItem() -> JSON.parse()
-        -> project.removeItem() -> json.stringify -> .setItem()
+        5. To add/edit an item, localStorage.getItem() -> JSON.parse()
+            -> project.addItem() -> json.stringify -> .setItem()
+        6. To remove an item, localStorage.getItem() -> JSON.parse()
+            -> project.removeItem() -> json.stringify -> .setItem()
+
+    -----------------------------------
+    
+    BUT
+    It's probably not gonna work because all of my objects to store
+    are basically functions, and it's too much work to redo the whole architecture.
 */
