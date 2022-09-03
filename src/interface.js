@@ -203,13 +203,16 @@ export default Todo
 
 // Secondly, I can customize CSS properly.
 
-// Thirdly, I can make proper forms to make projects and items.
-
-// Fourthly, it would be cool to do some input validation.
-
 // Fifthly, it would be nice to be able to edit your projects and items.
 
-// If there's no project name given, it shouldn't be created.
-// Ultimately, ^ comes down to input validation
+/* Store projects in localStorage
+    1. Store array of project objects in localStorage (proj_id: proj_obj)
+    2. To access a project, localStorage.getItem(proj_id)
+    3. To delete a project, localStorage.removeItem(proj_id)
+    4. To show projects, Object.keys(localStorage).forEach(func)
 
-// Store projects in localStorage
+    5. To add/edit an item, localStorage.getItem() -> JSON.parse()
+        -> project.addItem() -> json.stringify -> .setItem()
+    6. To remove an item, localStorage.getItem() -> JSON.parse()
+        -> project.removeItem() -> json.stringify -> .setItem()
+*/
