@@ -1,11 +1,13 @@
 export const projectForm = (addToProjectContainer) => {
+    
+    // create a form container
     const container = document.createElement('div')
     container.classList.add('projectFormContainer')
-    container.classList.toggle('active')
 
     const formTitle = document.createElement('h2')
     formTitle.textContent = "New Project"
 
+    // create the form itself
     const form = document.createElement('form')
     form.classList.add('projectForm')
 
@@ -15,6 +17,7 @@ export const projectForm = (addToProjectContainer) => {
     title.setAttribute('required', 'true')
     title.classList('projectTitle')
 
+    // submit button prevents page refresh and "closes" the form
     const submit = document.createElement('button')
     submit.textContent = "Add project"
     submit.addEventListener('click', (e) => {
@@ -22,8 +25,8 @@ export const projectForm = (addToProjectContainer) => {
         const projectTitle = document.querySelector('.projectTitle').value;
         addToProjectContainer(projectTitle)
         
-        const formContainer = document.querySelector('.projectFormContainer')
-        formContainer.classList.toggle('active');
+        // remove the form from the screen
+        document.removeChild(e.parentNode.parentNode)
     })
 
     form.appendChild(title)
@@ -37,13 +40,15 @@ export const projectForm = (addToProjectContainer) => {
 
 
 export const itemForm = (addToItemContainer) => {
+    
+    // create the form container
     const container = document.createElement('div')
     container.classList.add('itemFormContainer')
-    container.classList.toggle('active')
 
     const formTitle = document.createElement('h2')
     formTitle.textContent = "New Item"
 
+    // create the form itself
     const form = document.createElement('form')
     form.classList.add('itemForm')
 
@@ -73,6 +78,7 @@ export const itemForm = (addToItemContainer) => {
     priority.setAttribute('required', 'true')
     priority.classList('itemPriority')
 
+    // the button prevents page refresh and "closes" the form
     const submit = document.createElement('button')
     submit.textContent = "Add item"
     submit.addEventListener('click', (e) => {
@@ -83,8 +89,8 @@ export const itemForm = (addToItemContainer) => {
         const itemPriority = document.querySelector('.itemPriority').value;
         addToItemContainer(itemTitle, itemDescription, itemDue, itemPriority)
         
-        const formContainer = document.querySelector('.itemFormContainer')
-        formContainer.classList.toggle('active');
+        // remove the form from the screen
+        document.removeChild(e.parentNode.parentNode)
     })
 
     form.appendChild(title)
