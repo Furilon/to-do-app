@@ -5,8 +5,6 @@ module.exports = {
     devtool: "inline-source-map",
     entry: {    
         main: './src/main.js',
-        items: './src/items.js',
-        interface: './src/interface.js',
     },
     output: {
         filename: "[name].bundle.js",
