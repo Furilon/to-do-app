@@ -2,20 +2,20 @@ export const projectForm = (addProject) => {
     
     // create a form container
     const container = document.createElement('div')
-    container.classList.add('projectFormContainer')
+    container.id = 'projectFormContainer'
 
     const formTitle = document.createElement('h2')
     formTitle.textContent = "New Project"
 
     // create the form itself
     const form = document.createElement('form')
-    form.classList.add('projectForm')
+    form.id = 'projectForm'
 
     const title = document.createElement('input')
     title.setAttribute('type', 'text')
     title.setAttribute('placeholder', 'E.g., Inbox')
     title.setAttribute('required', 'true')
-    title.classList('projectTitle')
+    title.id = 'projectTitle'
 
     // submit button prevents page refresh and "closes" the form
     const submit = document.createElement('button')
@@ -44,32 +44,32 @@ export const itemForm = (addItem) => {
     
     // create the form container
     const container = document.createElement('div')
-    container.classList.add('itemFormContainer')
+    container.id ='itemFormContainer'
 
     const formTitle = document.createElement('h2')
     formTitle.textContent = "New Item"
 
     // create the form itself
     const form = document.createElement('form')
-    form.classList.add('itemForm')
+    form.id = 'itemForm'
 
     const title = document.createElement('input')
     title.setAttribute('type', 'text')
     title.setAttribute('placeholder', 'E.g., Call Dad')
     title.setAttribute('required', 'true')
-    title.classList('itemTitle')
+    title.id = 'itemTitle'
 
     const description = document.createElement('input')
     description.setAttribute('type', 'text')
     description.setAttribute('placeholder', 'E.g., And ask him about the sunset.')
     description.setAttribute('required', 'true')
-    description.classList('itemDescription')
+    description.id = 'itemDescription'
 
     const due = document.createElement('input')
     due.setAttribute('type', 'textarea')
     due.setAttribute('placeholder', 'E.g., Tonight')
     due.setAttribute('required', 'true')
-    due.classList('itemDue')
+    due.id = 'itemDue'
 
     const priority = document.createElement('input')
     priority.setAttribute('type', 'number')
@@ -77,7 +77,7 @@ export const itemForm = (addItem) => {
     priority.setAttribute('max', '4')
     priority.setAttribute('value', '1')
     priority.setAttribute('required', 'true')
-    priority.classList('itemPriority')
+    priority.id = 'itemPriority'
 
     // the button prevents page refresh and "closes" the form
     const submit = document.createElement('button')
