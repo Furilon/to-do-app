@@ -1,4 +1,4 @@
-export const projectForm = (addToProjectContainer) => {
+export const projectForm = (addProject) => {
     
     // create a form container
     const container = document.createElement('div')
@@ -22,8 +22,9 @@ export const projectForm = (addToProjectContainer) => {
     submit.textContent = "Add project"
     submit.addEventListener('click', (e) => {
         e.preventDefault()
-        const projectTitle = document.querySelector('.projectTitle').value;
-        addToProjectContainer(projectTitle)
+
+        // func that is supplied by the interface
+        addProject()
         
         // remove the form from the screen
         document.removeChild(e.parentNode.parentNode)
@@ -39,7 +40,7 @@ export const projectForm = (addToProjectContainer) => {
 }
 
 
-export const itemForm = (addToItemContainer) => {
+export const itemForm = (addItem) => {
     
     // create the form container
     const container = document.createElement('div')
@@ -83,11 +84,9 @@ export const itemForm = (addToItemContainer) => {
     submit.textContent = "Add item"
     submit.addEventListener('click', (e) => {
         e.preventDefault()
-        const itemTitle = document.querySelector('.itemTitle').value;
-        const itemDescription = document.querySelector('.itemDescription').value;
-        const itemDue = document.querySelector('.itemDue').value;
-        const itemPriority = document.querySelector('.itemPriority').value;
-        addToItemContainer(itemTitle, itemDescription, itemDue, itemPriority)
+
+        // func supplied by the interface
+        addItem()
         
         // remove the form from the screen
         document.removeChild(e.parentNode.parentNode)

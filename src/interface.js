@@ -1,5 +1,6 @@
 import { itemFactory, itemDOM } from './items'
 import { projectFactory, projectDOM } from './projects'
+import { projectForm, itemForm } from "./forms"
 
 const Todo = (() => {
     const defaultProject = projectFactory('Default')
@@ -10,7 +11,7 @@ const Todo = (() => {
     defaultProject.addItem(item2)
     defaultProject.addItem(item3)
     // A list of projectFactory objects, which are basically lists of items.
-    // Sp, it's a 2D list.
+    // So, it's a 2D list.
     let _projectList = [defaultProject]
 
     // Click on a particular proj, loop thru its items, and create an elem for each
@@ -58,9 +59,11 @@ const Todo = (() => {
 
     const makeProject = () => {
         // Make a project internally
-        const name = prompt('Give me a project name.')
-        const project = projectFactory(name)
-        _projectList.push(project)
+        projectForm(() => {
+            const projectTitle = document.querySelector('.projectTitle').value;
+            const project = projectFactory(projectTitle)
+            _projectList.push(project)
+        })
 
         // Make all projects inactive
         const projects = document.querySelectorAll('.project')
@@ -154,14 +157,17 @@ const Todo = (() => {
         const project = _projectList[projID]
 
         // Ask user about item's props
-        const title = prompt('Title of the to-do item: ')
-        const description = prompt('Description: ')
-        const dueDate = prompt('Due Date:')
-        const priority = prompt('Priority: ')
+        itemForm(() => {
+            const itemTitle = document.querySelector('.itemTitle').value;
+            const itemDescription = document.querySelector('.itemDescription').value;
+            const itemDue = document.querySelector('.itemDue').value;
+            const itemPriority = document.querySelector('.itemPriority').value;
 
-        // Make an item and add it to the project
-        const item = itemFactory(title, description, dueDate, priority)
-        project.addItem(item)
+            // Make an item and add it to the project
+            const item = itemFactory(title, description, dueDate, priority)
+            project.addItem(item)
+        })
+
 
         // Make item's DOM elem and add it to the page
         // Use last item's id + 1 as this new item's id
