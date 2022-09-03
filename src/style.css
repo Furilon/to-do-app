@@ -93,3 +93,44 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+#projectFormContainer {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    padding: 20px;
+    width: 200px;
+    height: 100px;
+    background-color: white;
+}
+
+#projectForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#itemFormContainer {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    padding: 20px;
+    width: 200px;
+    height: 300px;
+    background-color: white;
+}
+
+#itemForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
