@@ -1,3 +1,5 @@
+import { editItemForm } from "./forms";
+
 const itemFactory = (title, description, dueDate, priority) => {
     let _title = title;
     let _description = description;
@@ -20,7 +22,7 @@ const itemFactory = (title, description, dueDate, priority) => {
 };
 
 const itemDOM = (() => {
-    const createItem = (item, i) => {
+    const createItem = (item, i, editFunc) => {
         const container = document.createElement('div');
         container.classList.add('todo-item');
         container.id = i;
@@ -50,9 +52,16 @@ const itemDOM = (() => {
 
         container.appendChild(todoLeft)
 
+        const editBtn = document.createElement('button')
+        editBtn.textContent = "Edit";
+        editBtn.addEventListener('click', editFunc)
+        container.appendChild(editBtn)
+
         const checkbox = document.createElement('input');
         checkbox.setAttribute('type', 'checkbox');
         container.appendChild(checkbox);
+
+        
 
         return container;
     }

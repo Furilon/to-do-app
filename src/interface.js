@@ -27,7 +27,7 @@ const Todo = (() => {
         console.log(projID, project)
         const items = project.getItems()
         items.forEach((item, i) => {
-            const itemElem = itemDOM.createItem(item, i)
+            const itemElem = itemDOM.createItem(item, i, _editItem)
             itemElem.lastChild.addEventListener('click', removeItem)
             itemContainer.appendChild(itemElem)
         })
@@ -53,7 +53,7 @@ const Todo = (() => {
                 const itemContainer = document.getElementById('todos')
                 const items = proj.getItems()
                 items.forEach((item, i) => {
-                    const itemElem = itemDOM.createItem(item, i)
+                    const itemElem = itemDOM.createItem(item, i, _editItem)
                     itemElem.lastChild.addEventListener('click', removeItem)
                     itemContainer.appendChild(itemElem)
                 })
@@ -87,6 +87,17 @@ const Todo = (() => {
             // Delete items from prev proj
             _deleteItems()
         })
+    }
+
+    const editProject = () => {
+        // Find a project's id and its obj in _projectList
+        const projElem = document.querySelector('.active')
+        const projID = projElem.dataset.index
+        const project = _projectList[projID]
+        const projectTitleDOMElem = projElem.querySelector('.project-title')
+
+        // Call a form and edit the name when submitted
+        editProjectForm(project.getName(), project.setName, projectTitleDOMElem)
     }
 
     const removeProject = () => {
@@ -149,7 +160,7 @@ const Todo = (() => {
         const itemContainer = document.getElementById('todos')
         const items = project.getItems()
         items.forEach((item, i) => {
-            const itemElem = itemDOM.createItem(item, i)
+            const itemElem = itemDOM.createItem(item, i, _editItem)
             itemElem.lastChild.addEventListener('click', removeItem)
             itemContainer.appendChild(itemElem)
         })
@@ -179,21 +190,53 @@ const Todo = (() => {
             if (itemContainer.lastChild) {
                 itemID = itemContainer.lastChild.id + 1
             }
-            const itemElem = itemDOM.createItem(item, itemID)
+            const itemElem = itemDOM.createItem(item, itemID, _editItem)
             itemElem.lastChild.addEventListener('click', removeItem)
             itemContainer.appendChild(itemElem)
         })
     }
 
-    const editProject = () => {
+    const _editItem = (e) => {
         // Find a project's id and its obj in _projectList
         const projElem = document.querySelector('.active')
         const projID = projElem.dataset.index
         const project = _projectList[projID]
-        const projectTitleDOMElem = projElem.querySelector('.project-title')
 
-        // Call a form and edit the name when submitted
-        editProjectForm(project.getName(), project.setName, projectTitleDOMElem)
+        // Item's ID
+        const itemID = e.target.parentNode.id
+
+        // Item object
+        const itemsFromThisProject = project.getItems()
+        const item = itemsFromThisProject[itemID]
+
+        const oldItemInfo = {
+            oldTitle: item.getTitle(),
+            oldDescription: item.getDescription(),
+            oldDueDate: item.getDueDate(),
+            oldPriority: item.getPriority(),
+        }
+
+        const editFuncs = {
+            setTitle: item.setTitle,
+            setDescription: item.setDescription,
+            setDueDate: item.setDueDate,
+            setPriority: item.setPriority,
+        }
+
+        const mainItemElem = document.getElementById(itemID)
+        const itemLeftSide = mainItemElem.querySelector('.todo-item-left')
+        const itemTitleElem = itemLeftSide.querySelector('.todo-item-title')
+        const itemDescriptionElem = itemLeftSide.querySelector('.todo-item-description')
+        const itemDueElem = itemLeftSide.querySelector('.todo-item-duedate')
+        const itemPriorityElem = itemLeftSide.querySelector('.todo-item-priority')
+        const itemInfoDOM = {
+            title: itemTitleElem,
+            description: itemDescriptionElem,
+            dueDate: itemDueElem,
+            priority: itemPriorityElem,
+        }
+
+        editItemForm(oldItemInfo, editFuncs, itemInfoDOM);
     }
 
     return {

@@ -186,11 +186,9 @@ export const createItemForm = (addItem) => {
 }
 
 export const editItemForm = (
-    oldTitle,
-    oldDescription,
-    oldDueDate,
-    oldPriority,
-    editItem
+    oldInfo,
+    editFuncs,
+    itemInfoDOM
 ) => {
     // create the form container
     const container = document.createElement('div')
@@ -205,19 +203,19 @@ export const editItemForm = (
 
     const title = document.createElement('input')
     title.setAttribute('type', 'text')
-    title.setAttribute('value', oldTitle)
+    title.setAttribute('value', oldInfo.oldTitle)
     title.setAttribute('required', 'true')
     title.id = 'itemTitle'
 
     const description = document.createElement('input')
     description.setAttribute('type', 'text')
-    description.setAttribute('value', oldDescription)
+    description.setAttribute('value', oldInfo.oldDescription)
     description.setAttribute('required', 'true')
     description.id = 'itemDescription'
 
     const due = document.createElement('input')
     due.setAttribute('type', 'textarea')
-    due.setAttribute('value', oldDueDate)
+    due.setAttribute('value', oldInfo.oldDueDate)
     due.setAttribute('required', 'true')
     due.id = 'itemDue'
 
@@ -225,7 +223,7 @@ export const editItemForm = (
     priority.setAttribute('type', 'number')
     priority.setAttribute('min', '1')
     priority.setAttribute('max', '4')
-    priority.setAttribute('value', oldPriority)
+    priority.setAttribute('value', oldInfo.oldPriority)
     priority.setAttribute('required', 'true')
     priority.id = 'itemPriority'
 
@@ -235,8 +233,23 @@ export const editItemForm = (
     submit.addEventListener('click', (e) => {
         e.preventDefault()
 
-        // func supplied by the interface
-        editItem()
+        // get the new values
+        const newTitle = document.getElementById('itemTitle').value
+        const newDescription = document.getElementById('itemDescription').value
+        const newDue = document.getElementById('itemDue').value
+        const newPriority = document.getElementById('itemPriority').value
+        
+        // funcs supplied by the interface
+        editFuncs.setTitle(newTitle)
+        editFuncs.setDescription(newDescription)
+        editFuncs.setDueDate(newDue)
+        editFuncs.setPriority(newPriority)
+
+        // elems supplied by the interface
+        itemInfoDOM.title.textContent = newTitle
+        itemInfoDOM.description.textContent = newDescription
+        itemInfoDOM.dueDate.textContent = newDue
+        itemInfoDOM.priority.textContent = newPriority
 
         // remove the form from the screen
         const body = document.querySelector('body')
@@ -250,7 +263,7 @@ export const editItemForm = (
     close.addEventListener('click', (e) => {
         // remove the form from the screen
         const body = document.querySelector('body')
-        body.removeChild(e.target.parentNode.parentNode)
+        body.removeChild(e.target.parentNode)
     })
 
     form.appendChild(title)
