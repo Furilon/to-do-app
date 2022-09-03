@@ -32,5 +32,8 @@ createProjBtn.addEventListener("click", Todo.makeProject);
 const createItemBtn = document.getElementById('create-item');
 createItemBtn.addEventListener('click', Todo.makeItem);
 
-const removeProjectBtn = document.getElementById('remove-project');
-removeProjectBtn.addEventListener('click', Todo.removeProject);
+const removeProjBtn = document.getElementById('remove-project');
+removeProjBtn.addEventListener('click', Todo.removeProject);
+
+const editProjBtn = document.getElementById('edit-project');
+editProjBtn.addEventListener('click', Todo.editProject)

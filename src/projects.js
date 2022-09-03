@@ -1,5 +1,5 @@
 const projectFactory = (name) => {
-    const _name = name;
+    let _name = name;
     const _itemList = [];
 
     const getName = () => _name;
@@ -13,7 +13,7 @@ const projectFactory = (name) => {
 };
 
 const projectDOM = (() => {
-    const createProject = (project, id) => {
+    const createProject = (project, id, editFunc) => {
         const container = document.createElement('div');
         container.classList.add('project');
         container.setAttribute('data-index', id);
@@ -22,7 +22,6 @@ const projectDOM = (() => {
         title.classList.add('project-title');
         title.textContent = project.getName();
         container.appendChild(title);
-
         return container;
     }
 

@@ -1,6 +1,11 @@
 import { itemFactory, itemDOM } from './items'
 import { projectFactory, projectDOM } from './projects'
-import { createProjectForm, createItemForm } from "./forms"
+import {
+    createProjectForm,
+    createItemForm,
+    editProjectForm,
+    editItemForm,
+} from './forms'
 
 const Todo = (() => {
     const defaultProject = projectFactory('Default')
@@ -19,10 +24,10 @@ const Todo = (() => {
         const itemContainer = document.getElementById('todos')
         const projID = e.target.dataset.index
         const project = _projectList[projID]
+        console.log(projID, project)
         const items = project.getItems()
         items.forEach((item, i) => {
             const itemElem = itemDOM.createItem(item, i)
-            console.log(itemElem.lastChild)
             itemElem.lastChild.addEventListener('click', removeItem)
             itemContainer.appendChild(itemElem)
         })
@@ -60,14 +65,14 @@ const Todo = (() => {
     const makeProject = () => {
         // Make a project internally
         createProjectForm(() => {
-            const projectTitle = document.querySelector('#projectTitle').value;
+            const projectTitle = document.querySelector('#projectTitle').value
             const project = projectFactory(projectTitle)
             _projectList.push(project)
-            
+
             // Make all projects inactive
             const projects = document.querySelectorAll('.project')
             projects.forEach((proj) => proj.classList.remove('active'))
-    
+
             // Figure out project's id and make a project DOM
             const projContainer = document.getElementById('projects')
             let projID = 0
@@ -78,11 +83,10 @@ const Todo = (() => {
             projElem.classList.add('active')
             projElem.addEventListener('click', makeProjectActive)
             projContainer.appendChild(projElem)
-    
+
             // Delete items from prev proj
             _deleteItems()
         })
-
     }
 
     const removeProject = () => {
@@ -159,15 +163,15 @@ const Todo = (() => {
 
         // Ask user about item's props
         createItemForm(() => {
-            const title = document.querySelector('#itemTitle').value;
-            const description = document.querySelector('#itemDescription').value;
-            const dueDate = document.querySelector('#itemDue').value;
-            const priority = document.querySelector('#itemPriority').value;
+            const title = document.querySelector('#itemTitle').value
+            const description = document.querySelector('#itemDescription').value
+            const dueDate = document.querySelector('#itemDue').value
+            const priority = document.querySelector('#itemPriority').value
 
             // Make an item and add it to the project
             const item = itemFactory(title, description, dueDate, priority)
             project.addItem(item)
-            
+
             // Make item's DOM elem and add it to the page
             // Use last item's id + 1 as this new item's id
             const itemContainer = document.getElementById('todos')
@@ -179,8 +183,17 @@ const Todo = (() => {
             itemElem.lastChild.addEventListener('click', removeItem)
             itemContainer.appendChild(itemElem)
         })
+    }
 
+    const editProject = () => {
+        // Find a project's id and its obj in _projectList
+        const projElem = document.querySelector('.active')
+        const projID = projElem.dataset.index
+        const project = _projectList[projID]
+        const projectTitleDOMElem = projElem.querySelector('.project-title')
 
+        // Call a form and edit the name when submitted
+        editProjectForm(project.getName(), project.setName, projectTitleDOMElem)
     }
 
     return {
@@ -190,6 +203,7 @@ const Todo = (() => {
         removeItem,
         makeProjectActive,
         showProjects,
+        editProject
     }
 })()
 
