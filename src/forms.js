@@ -1,11 +1,10 @@
 export const createProjectForm = (addProject) => {
-    
     // create a form container
     const container = document.createElement('div')
     container.id = 'projectFormContainer'
 
     const formTitle = document.createElement('h2')
-    formTitle.textContent = "New Project"
+    formTitle.textContent = 'New Project'
 
     // create the form itself
     const form = document.createElement('form')
@@ -19,37 +18,101 @@ export const createProjectForm = (addProject) => {
 
     // submit button prevents page refresh and "closes" the form
     const submit = document.createElement('button')
-    submit.textContent = "Add project"
+    submit.textContent = 'Add project'
     submit.addEventListener('click', (e) => {
         e.preventDefault()
 
         // func that is supplied by the interface
         addProject()
-        
+
         // remove the form from the screen
         const body = document.querySelector('body')
         body.removeChild(e.target.parentNode.parentNode)
     })
 
+    // close button closes the form
+    const close = document.createElement('button')
+    close.textContent = 'Close'
+    close.setAttribute('value', 'button')
+    close.addEventListener('click', (e) => {
+        // remove the form from the screen
+        const body = document.querySelector('body')
+        body.removeChild(e.target.parentNode)
+    })
+
     form.appendChild(title)
     form.appendChild(submit)
-    
+
     container.appendChild(formTitle)
     container.appendChild(form)
+    container.appendChild(close)
 
     const body = document.querySelector('body')
     body.appendChild(container)
 }
 
-
-export const createItemForm = (addItem) => {
-    
-    // create the form container
+export const editProjectForm = (oldTitle, editTitle, titleElem) => {
+    // create a form container
     const container = document.createElement('div')
-    container.id ='itemFormContainer'
+    container.id = 'projectFormContainer'
 
     const formTitle = document.createElement('h2')
-    formTitle.textContent = "New Item"
+    formTitle.textContent = 'Edit Project Title'
+
+    // create the form itself
+    const form = document.createElement('form')
+    form.id = 'projectForm'
+
+    const title = document.createElement('input')
+    title.setAttribute('type', 'text')
+    title.setAttribute('value', oldTitle)
+    title.setAttribute('required', 'true')
+    title.id = 'projectTitle'
+
+    // submit button prevents page refresh and "closes" the form
+    const submit = document.createElement('button')
+    submit.textContent = 'Edit'
+    submit.addEventListener('click', (e) => {
+        e.preventDefault()
+
+        // func that is supplied by the interface
+        const newTitle = document.querySelector('#projectTitle').value
+        editTitle(newTitle)
+        titleElem.textContent = newTitle
+
+        // remove the form from the screen
+        const body = document.querySelector('body')
+        body.removeChild(e.target.parentNode.parentNode)
+    })
+
+    // close button closes the form
+    const close = document.createElement('button')
+    close.textContent = 'Close'
+    close.setAttribute('value', 'button')
+    close.addEventListener('click', (e) => {
+        // remove the form from the screen
+        const body = document.querySelector('body')
+        body.removeChild(e.target.parentNode)
+    })
+
+    form.appendChild(title)
+    form.appendChild(submit)
+
+    container.appendChild(formTitle)
+    container.appendChild(form)
+    container.appendChild(close)
+
+    const body = document.querySelector('body')
+    body.appendChild(container)
+}
+
+export const createItemForm = (addItem) => {
+    // create the form container
+    const container = document.createElement('div')
+    container.id = 'itemFormContainer'
+
+    const formTitle = document.createElement('h2')
+    formTitle.textContent = 'New Item'
 
     // create the form itself
     const form = document.createElement('form')
@@ -63,7 +126,10 @@ export const createItemForm = (addItem) => {
 
     const description = document.createElement('input')
     description.setAttribute('type', 'text')
-    description.setAttribute('placeholder', 'E.g., And ask him about the sunset.')
+    description.setAttribute(
+        'placeholder',
+        'E.g., And ask him about the sunset.'
+    )
     description.setAttribute('required', 'true')
     description.id = 'itemDescription'
 
@@ -83,13 +149,23 @@ export const createItemForm = (addItem) => {
 
     // the button prevents page refresh and "closes" the form
     const submit = document.createElement('button')
-    submit.textContent = "Add item"
+    submit.textContent = 'Add item'
     submit.addEventListener('click', (e) => {
         e.preventDefault()
 
         // func supplied by the interface
         addItem()
-        
+
+        // remove the form from the screen
+        const body = document.querySelector('body')
+        body.removeChild(e.target.parentNode.parentNode)
+    })
+
+    // close button closes the form
+    const close = document.createElement('button')
+    close.textContent = 'Close'
+    close.setAttribute('value', 'button')
+    close.addEventListener('click', (e) => {
         // remove the form from the screen
         const body = document.querySelector('body')
         body.removeChild(e.target.parentNode.parentNode)
@@ -100,9 +176,92 @@ export const createItemForm = (addItem) => {
     form.appendChild(due)
     form.appendChild(priority)
     form.appendChild(submit)
-    
+
     container.appendChild(formTitle)
     container.appendChild(form)
+    container.appendChild(close)
+
+    const body = document.querySelector('body')
+    body.appendChild(container)
+}
+
+export const editItemForm = (
+    oldTitle,
+    oldDescription,
+    oldDueDate,
+    oldPriority,
+    editItem
+) => {
+    // create the form container
+    const container = document.createElement('div')
+    container.id = 'itemFormContainer'
+
+    const formTitle = document.createElement('h2')
+    formTitle.textContent = 'Edit Item'
+
+    // create the form itself
+    const form = document.createElement('form')
+    form.id = 'itemForm'
+
+    const title = document.createElement('input')
+    title.setAttribute('type', 'text')
+    title.setAttribute('value', oldTitle)
+    title.setAttribute('required', 'true')
+    title.id = 'itemTitle'
+
+    const description = document.createElement('input')
+    description.setAttribute('type', 'text')
+    description.setAttribute('value', oldDescription)
+    description.setAttribute('required', 'true')
+    description.id = 'itemDescription'
+
+    const due = document.createElement('input')
+    due.setAttribute('type', 'textarea')
+    due.setAttribute('value', oldDueDate)
+    due.setAttribute('required', 'true')
+    due.id = 'itemDue'
+
+    const priority = document.createElement('input')
+    priority.setAttribute('type', 'number')
+    priority.setAttribute('min', '1')
+    priority.setAttribute('max', '4')
+    priority.setAttribute('value', oldPriority)
+    priority.setAttribute('required', 'true')
+    priority.id = 'itemPriority'
+
+    // the button prevents page refresh and "closes" the form
+    const submit = document.createElement('button')
+    submit.textContent = 'Edit'
+    submit.addEventListener('click', (e) => {
+        e.preventDefault()
+
+        // func supplied by the interface
+        editItem()
+
+        // remove the form from the screen
+        const body = document.querySelector('body')
+        body.removeChild(e.target.parentNode.parentNode)
+    })
+
+    // close button closes the form
+    const close = document.createElement('button')
+    close.setAttribute('value', 'button')
+    close.textContent = 'Close'
+    close.addEventListener('click', (e) => {
+        // remove the form from the screen
+        const body = document.querySelector('body')
+        body.removeChild(e.target.parentNode.parentNode)
+    })
+
+    form.appendChild(title)
+    form.appendChild(description)
+    form.appendChild(due)
+    form.appendChild(priority)
+    form.appendChild(submit)
+
+    container.appendChild(formTitle)
+    container.appendChild(form)
+    container.appendChild(close)
 
     const body = document.querySelector('body')
     body.appendChild(container)
