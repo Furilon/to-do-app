@@ -19,18 +19,28 @@ const Todo = (() => {
     // So, it's a 2D list.
     let _projectList = [defaultProject]
 
-    // Click on a particular proj, loop thru its items, and create an elem for each
-    const _showItems = (e) => {
-        const itemContainer = document.getElementById('todos')
-        const projID = e.target.dataset.index
+    const _findActiveProject = () => {
+        const projElem = document.querySelector('.active')
+        const projID = projElem.dataset.index
         const project = _projectList[projID]
-        console.log(projID, project)
+
+        return project
+    }
+
+    const _createItems = (project) => {
+        const itemContainer = document.getElementById('todos')
         const items = project.getItems()
         items.forEach((item, i) => {
             const itemElem = itemDOM.createItem(item, i, _editItem)
             itemElem.lastChild.addEventListener('click', removeItem)
             itemContainer.appendChild(itemElem)
         })
+    } 
+
+    // Click on a particular proj, loop thru its items, and create an elem for each
+    const _showItems = (e) => {
+        const project = _findActiveProject()
+        _createItems(project);
     }
 
     const _deleteItems = () => {
@@ -50,13 +60,7 @@ const Todo = (() => {
             if (i == 0) {
                 projectElem.classList.add('active')
                 projectElem.addEventListener('click', makeProjectActive)
-                const itemContainer = document.getElementById('todos')
-                const items = proj.getItems()
-                items.forEach((item, i) => {
-                    const itemElem = itemDOM.createItem(item, i, _editItem)
-                    itemElem.lastChild.addEventListener('click', removeItem)
-                    itemContainer.appendChild(itemElem)
-                })
+                _createItems(proj)
             }
             projContainer.appendChild(projectElem)
         })
@@ -116,13 +120,7 @@ const Todo = (() => {
         // Show active project's items
         const projectID = projectElem.dataset.index
         const project = _projectList[projectID]
-        const itemContainer = document.getElementById('todos')
-        const items = project.getItems()
-        items.forEach((item, i) => {
-            const itemElem = itemDOM.createItem(item, i)
-            itemElem.lastChild.addEventListener('click', removeItem)
-            itemContainer.appendChild(itemElem)
-        })
+        _createItems(project)
     }
 
     // Make all projects inactive and activate this project
@@ -144,9 +142,7 @@ const Todo = (() => {
     // Find an item's id, delete its DOM and push out of _itemList
     const removeItem = (e) => {
         // Find a project's id and its obj in _projectList
-        const projElem = document.querySelector('.active')
-        const projID = projElem.dataset.index
-        const project = _projectList[projID]
+        const project = _findActiveProject();
 
         // Item's ID
         const itemID = e.target.parentNode.id
@@ -168,9 +164,7 @@ const Todo = (() => {
 
     const makeItem = () => {
         // Find active project
-        const projElem = document.querySelector('.active')
-        const projID = projElem.dataset.index
-        const project = _projectList[projID]
+        const project = _findActiveProject()
 
         // Ask user about item's props
         createItemForm(() => {
@@ -257,23 +251,3 @@ export default Todo
 // That is easily fixable.
 
 // Secondly, I can customize CSS properly.
-
-// Fifthly, it would be nice to be able to edit your projects and items.
-
-/* Store projects in localStorage
-        1. Store array of project objects in localStorage (proj_id: proj_obj)
-        2. To access a project, localStorage.getItem(proj_id)
-        3. To delete a project, localStorage.removeItem(proj_id)
-        4. To show projects, Object.keys(localStorage).forEach(func)
-
-        5. To add/edit an item, localStorage.getItem() -> JSON.parse()
-            -> project.addItem() -> json.stringify -> .setItem()
-        6. To remove an item, localStorage.getItem() -> JSON.parse()
-            -> project.removeItem() -> json.stringify -> .setItem()
-
-    -----------------------------------
-    
-    BUT
-    It's probably not gonna work because all of my objects to store
-    are basically functions, and it's too much work to redo the whole architecture.
-*/
