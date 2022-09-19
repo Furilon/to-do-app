@@ -168,7 +168,7 @@ export const createItemForm = (addItem) => {
     close.addEventListener('click', (e) => {
         // remove the form from the screen
         const body = document.querySelector('body')
-        body.removeChild(e.target.parentNode.parentNode)
+        body.removeChild(e.target.parentNode)
     })
 
     form.appendChild(title)
