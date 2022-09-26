@@ -53,11 +53,6 @@ const itemDOM = (() => {
         dueDate.textContent = item.getDueDate()
         todoLeft.appendChild(dueDate)
 
-        const priority = document.createElement('p')
-        priority.classList.add('todo-item-priority')
-        priority.textContent = item.getPriority()
-        todoLeft.appendChild(priority)
-
         const checkbox = document.createElement('input')
         checkbox.setAttribute('type', 'checkbox')
         const className = _priorityColor(item.getPriority())
