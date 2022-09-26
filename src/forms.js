@@ -124,15 +124,6 @@ export const createItemForm = (addItem) => {
     title.setAttribute('required', 'true')
     title.id = 'itemTitle'
 
-    const description = document.createElement('input')
-    description.setAttribute('type', 'text')
-    description.setAttribute(
-        'placeholder',
-        'E.g., And ask him about the sunset.'
-    )
-    description.setAttribute('required', 'true')
-    description.id = 'itemDescription'
-
     const due = document.createElement('input')
     due.setAttribute('type', 'textarea')
     due.setAttribute('placeholder', 'E.g., Tonight')
@@ -172,7 +163,6 @@ export const createItemForm = (addItem) => {
     })
 
     form.appendChild(title)
-    form.appendChild(description)
     form.appendChild(due)
     form.appendChild(priority)
     form.appendChild(submit)
@@ -185,11 +175,7 @@ export const createItemForm = (addItem) => {
     body.appendChild(container)
 }
 
-export const editItemForm = (
-    oldInfo,
-    editFuncs,
-    itemInfoDOM
-) => {
+export const editItemForm = (oldInfo, editFuncs, itemInfoDOM) => {
     // create the form container
     const container = document.createElement('div')
     container.id = 'itemFormContainer'
@@ -206,12 +192,6 @@ export const editItemForm = (
     title.setAttribute('value', oldInfo.oldTitle)
     title.setAttribute('required', 'true')
     title.id = 'itemTitle'
-
-    const description = document.createElement('input')
-    description.setAttribute('type', 'text')
-    description.setAttribute('value', oldInfo.oldDescription)
-    description.setAttribute('required', 'true')
-    description.id = 'itemDescription'
 
     const due = document.createElement('input')
     due.setAttribute('type', 'textarea')
@@ -235,19 +215,16 @@ export const editItemForm = (
 
         // get the new values
         const newTitle = document.getElementById('itemTitle').value
-        const newDescription = document.getElementById('itemDescription').value
         const newDue = document.getElementById('itemDue').value
         const newPriority = document.getElementById('itemPriority').value
-        
+
         // funcs supplied by the interface
         editFuncs.setTitle(newTitle)
-        editFuncs.setDescription(newDescription)
         editFuncs.setDueDate(newDue)
         editFuncs.setPriority(newPriority)
 
         // elems supplied by the interface
         itemInfoDOM.title.textContent = newTitle
-        itemInfoDOM.description.textContent = newDescription
         itemInfoDOM.dueDate.textContent = newDue
         itemInfoDOM.priority.textContent = newPriority
 
@@ -267,7 +244,6 @@ export const editItemForm = (
     })
 
     form.appendChild(title)
-    form.appendChild(description)
     form.appendChild(due)
     form.appendChild(priority)
     form.appendChild(submit)

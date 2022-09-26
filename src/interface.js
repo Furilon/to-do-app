@@ -9,9 +9,9 @@ import {
 
 const Todo = (() => {
     const defaultProject = projectFactory('Default')
-    const item1 = itemFactory('Call Ben', 'About work', 'Jan 29th', '3')
-    const item2 = itemFactory('Call Jane', 'About school', 'Jan 28th', '1')
-    const item3 = itemFactory('Call Vadym', 'About family', 'Jan 27th', '2')
+    const item1 = itemFactory('Call Ben', 'Jan 29th', '3')
+    const item2 = itemFactory('Call Jane', 'Jan 28th', '1')
+    const item3 = itemFactory('Call Vadym', 'Jan 27th', '2')
     defaultProject.addItem(item1)
     defaultProject.addItem(item2)
     defaultProject.addItem(item3)
@@ -35,12 +35,12 @@ const Todo = (() => {
             itemElem.lastChild.addEventListener('click', removeItem)
             itemContainer.appendChild(itemElem)
         })
-    } 
+    }
 
     // Click on a particular proj, loop thru its items, and create an elem for each
     const _showItems = (e) => {
         const project = _findActiveProject()
-        _createItems(project);
+        _createItems(project)
     }
 
     const _deleteItems = () => {
@@ -142,7 +142,7 @@ const Todo = (() => {
     // Find an item's id, delete its DOM and push out of _itemList
     const removeItem = (e) => {
         // Find a project's id and its obj in _projectList
-        const project = _findActiveProject();
+        const project = _findActiveProject()
 
         // Item's ID
         const itemID = e.target.parentNode.id
@@ -169,12 +169,11 @@ const Todo = (() => {
         // Ask user about item's props
         createItemForm(() => {
             const title = document.querySelector('#itemTitle').value
-            const description = document.querySelector('#itemDescription').value
             const dueDate = document.querySelector('#itemDue').value
             const priority = document.querySelector('#itemPriority').value
 
             // Make an item and add it to the project
-            const item = itemFactory(title, description, dueDate, priority)
+            const item = itemFactory(title, dueDate, priority)
             project.addItem(item)
 
             // Make item's DOM elem and add it to the page
@@ -205,14 +204,12 @@ const Todo = (() => {
 
         const oldItemInfo = {
             oldTitle: item.getTitle(),
-            oldDescription: item.getDescription(),
             oldDueDate: item.getDueDate(),
             oldPriority: item.getPriority(),
         }
 
         const editFuncs = {
             setTitle: item.setTitle,
-            setDescription: item.setDescription,
             setDueDate: item.setDueDate,
             setPriority: item.setPriority,
         }
@@ -220,17 +217,17 @@ const Todo = (() => {
         const mainItemElem = document.getElementById(itemID)
         const itemLeftSide = mainItemElem.querySelector('.todo-item-left')
         const itemTitleElem = itemLeftSide.querySelector('.todo-item-title')
-        const itemDescriptionElem = itemLeftSide.querySelector('.todo-item-description')
         const itemDueElem = itemLeftSide.querySelector('.todo-item-duedate')
-        const itemPriorityElem = itemLeftSide.querySelector('.todo-item-priority')
+        const itemPriorityElem = itemLeftSide.querySelector(
+            '.todo-item-priority'
+        )
         const itemInfoDOM = {
             title: itemTitleElem,
-            description: itemDescriptionElem,
             dueDate: itemDueElem,
             priority: itemPriorityElem,
         }
 
-        editItemForm(oldItemInfo, editFuncs, itemInfoDOM);
+        editItemForm(oldItemInfo, editFuncs, itemInfoDOM)
     }
 
     return {
@@ -240,7 +237,7 @@ const Todo = (() => {
         removeItem,
         makeProjectActive,
         showProjects,
-        editProject
+        editProject,
     }
 })()
 
