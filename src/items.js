@@ -22,6 +22,19 @@ const itemFactory = (title, dueDate, priority) => {
 }
 
 const itemDOM = (() => {
+    const _priorityColor = (priority) => {
+        switch (priority) {
+            case '1':
+                return { border: '#880407', backgroundColor: '#E36D6D' }
+            case '2':
+                return { border: '#F6C401', backgroundColor: '#A7AD07' }
+            case '3':
+                return { border: '#04056F', backgroundColor: '#0F01F4' }
+            case '4':
+                return { border: 'slategray', backgroundColor: 'gray' }
+        }
+    }
+
     const createItem = (item, i, editFunc) => {
         const container = document.createElement('div')
         container.classList.add('todo-item')
@@ -47,6 +60,11 @@ const itemDOM = (() => {
 
         const checkbox = document.createElement('input')
         checkbox.setAttribute('type', 'checkbox')
+        const { borderColor, backgroundColor } = _priorityColor(
+            item.getPriority()
+        )
+        checkbox.style.border = `2px solid ${borderColor}`
+        checkbox.style.backgroundColor = backgroundColor
         container.appendChild(checkbox)
 
         container.appendChild(todoLeft)
