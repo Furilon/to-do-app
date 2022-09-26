@@ -25,13 +25,13 @@ const itemDOM = (() => {
     const _priorityColor = (priority) => {
         switch (priority) {
             case '1':
-                return { border: '#880407', backgroundColor: '#E36D6D' }
+                return 'one'
             case '2':
-                return { border: '#F6C401', backgroundColor: '#A7AD07' }
+                return 'two'
             case '3':
-                return { border: '#04056F', backgroundColor: '#0F01F4' }
+                return 'three'
             case '4':
-                return { border: 'slategray', backgroundColor: 'gray' }
+                return 'four'
         }
     }
 
@@ -60,11 +60,8 @@ const itemDOM = (() => {
 
         const checkbox = document.createElement('input')
         checkbox.setAttribute('type', 'checkbox')
-        const { borderColor, backgroundColor } = _priorityColor(
-            item.getPriority()
-        )
-        checkbox.style.border = `2px solid ${borderColor}`
-        checkbox.style.backgroundColor = backgroundColor
+        const className = _priorityColor(item.getPriority())
+        checkbox.classList.add(className)
         container.appendChild(checkbox)
 
         container.appendChild(todoLeft)

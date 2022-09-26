@@ -123,15 +123,50 @@ button:hover {
 
 .todo-item input {
     -webkit-appearance: none;
-    border: 2px solid #3A3042;
-    border-radius: 10px;
+    border-radius: 45%;
     padding: 20px;
+    transition: background-color 0.2s ease-out 0.01s;
+    cursor: pointer;
+}
+
+.one {
+    border: 3px solid #6e0101;
+    background-color: #cba8a8;
     transition: background-color 0.2s ease-out 0.01s;
 }
 
-.todo-item input:hover {
-    background-color: #3A3042;
-    cursor: pointer;
+.one:hover {
+    background-color: #6e0101;
+}
+
+.two {
+    border: 3px solid #897400;
+    background-color: #d1cc7e;
+    transition: background-color 0.2s ease-out 0.01s;
+}
+
+.two:hover {
+    background-color: #897400;
+}
+
+.three {
+    border: 3px solid #1300e3;
+    background-color: #9f99e5;
+    transition: background-color 0.2s ease-out 0.01s;
+}
+
+.three:hover {
+    background-color: #1300e3;
+}
+
+.four {
+    border: 3px solid slategray;
+    background-color: rgb(72, 72, 72);
+    transition: background-color 0.2s ease-out 0.01s;
+}
+
+.four:hover {
+    background-color: slategray;
 }
 
 #footer {
