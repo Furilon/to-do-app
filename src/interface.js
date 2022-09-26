@@ -32,7 +32,7 @@ const Todo = (() => {
         const items = project.getItems()
         items.forEach((item, i) => {
             const itemElem = itemDOM.createItem(item, i, _editItem)
-            itemElem.lastChild.addEventListener('click', removeItem)
+            itemElem.firstChild.addEventListener('click', removeItem)
             itemContainer.appendChild(itemElem)
         })
     }
