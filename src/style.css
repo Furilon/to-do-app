@@ -4,19 +4,34 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    overflow: hidden;
+    background-color: #EDFFD9;
 }
 
 #header {
-    border: 1px solid black;
+    border-bottom: 2px solid #3A3042;
     padding: 20px;
     flex: 0 0 auto;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-evenly;
+}
+
+button {
+    background-color: #EDFFD9;
+    color: #3A3042;
+    border: 2px solid #3A3042;
+    border-radius: 10px;
+    padding: 5px 8px;
+    transition: background-color 0.2s linear 0.01s,
+                color 0.2s linear 0.01s;
+}
+
+button:hover {
+    color: #EDFFD9;
+    background-color: #3A3042;
+    cursor: pointer;
 }
 
 #content {
-    border: 1px solid red;
     display: flex;
     flex: 1 1 auto;
 }
@@ -33,19 +48,20 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 1.3em;
+    border-bottom: 2px solid #3A3042
 }
 
 .project:hover {
-    background-color: rgb(221, 221, 221);
+    background-color: #ff784f;
 }
 
 .active {
-    background-color: rgb(255, 212, 212);
+    background-color: #db9d47;
     font-weight: bold;
 }
 
 #content #projects {
-    border: 2px solid purple;
+    border-right: 2px solid #3A3042;
     display: flex;
     flex-direction: column;
     flex: 1 0 auto;
@@ -53,7 +69,6 @@ body {
 }
 
 #content #todos {
-    border: 2px solid green;
     display: flex;
     flex-direction: column;
     flex: 1 0 auto;
@@ -84,10 +99,11 @@ body {
 
 .todo-item input:hover {
     background-color: rgb(195, 195, 195);
+    cursor: pointer;
 }
 
 #footer {
-    border: 1px solid green;
+    border-top: 2px solid #3A3042;
     padding: 20px;
     display: flex;
     justify-content: center;
