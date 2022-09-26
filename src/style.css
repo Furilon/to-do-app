@@ -7,23 +7,56 @@ body {
     background-color: #EDFFD9;
 }
 
+h2 {
+    color: #EDFFD9;
+    margin: 0;
+    padding: 0;
+}
+
 #header {
     border-bottom: 2px solid #3A3042;
     padding: 20px;
     flex: 0 0 auto;
     display: flex;
+    justify-content: space-between;
+    background-color: #3A3042;
+}
+
+#header > div {
+    display: flex;
     justify-content: space-evenly;
+}
+
+#header button {
+    background-color: #3A3042;
+    margin-right: 10px;
+    color: #EDFFD9;
+    font-weight: bold;
+    border: 2px solid #EDFFD9;
+    border-radius: 10px;
+    padding: 5px 8px;
+    transition: background-color 0.2s ease-out 0.01s,
+                color 0.2s ease-out 0.01s;
+}
+
+#header button:hover {
+    color: #3A3042;
+    background-color: #EDFFD9;
+    cursor: pointer;
 }
 
 button {
     background-color: #EDFFD9;
+    margin-right: 10px;
     color: #3A3042;
+    font-weight: bold;
     border: 2px solid #3A3042;
     border-radius: 10px;
     padding: 5px 8px;
-    transition: background-color 0.2s linear 0.01s,
-                color 0.2s linear 0.01s;
+    transition: background-color 0.2s ease-out 0.01s,
+                color 0.2s ease-out 0.01s;
 }
+
 
 button:hover {
     color: #EDFFD9;
@@ -76,10 +109,11 @@ button:hover {
 
 .todo-item {
     margin: 20px;
-    border: 1px solid slategray;
+    border: 2px solid #3A3042;
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 10px;
 }
 
 .todo-item-left {
@@ -88,17 +122,15 @@ button:hover {
 }
 
 .todo-item input {
-    margin-left: auto;
-    margin-right: 100px;
-    margin-top: 80px;
     -webkit-appearance: none;
-    border: 1px solid black;
-    border-radius: 3px;
+    border: 2px solid #3A3042;
+    border-radius: 10px;
     padding: 20px;
+    transition: background-color 0.2s ease-out 0.01s;
 }
 
 .todo-item input:hover {
-    background-color: rgb(195, 195, 195);
+    background-color: #3A3042;
     cursor: pointer;
 }
 
@@ -108,6 +140,8 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #3A3042;
+    color: #EDFFD9;
 }
 
 #projectFormContainer {
