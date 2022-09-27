@@ -187,32 +187,7 @@ button:hover {
     color: #EDFFD9;
 }
 
-#projectFormContainer {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid #3A3042;
-    padding: 20px;
-    width: 200px;
-    height: 100px;
-    background-color: #EDFFD9;
-    color: #3A3042;
-    border-radius: 13px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-#projectForm {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-#itemFormContainer {
+#projectFormContainer, #itemFormContainer {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -220,8 +195,8 @@ button:hover {
     align-items: center;
     border: 2px solid #3A3042;
     padding: 20px;
-    width: 200px;
-    height: 300px;
+    max-width: 250px;
+    height: 200px;
     background-color: #EDFFD9;
     color: #3A3042;
     border-radius: 13px;
@@ -230,10 +205,31 @@ button:hover {
     transform: translate(-50%, -50%);
 }
 
-#itemForm {
+#itemFormContainer {
+    justify-content: space-around;
+    max-width: 250px;
+    height: 350px;
+}
+
+form {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
 }
+
+form input {
+    margin-bottom: 8px;
+    border: 2px solid #3A3042;
+    background-color: #EDFFD9;
+    border-radius: 13px; 
+    padding: 8px 13px;
+    color: #3A3042
+}
+
+form input:focus {
+    background-color: #3A3042;
+    color:#EDFFD9
+}
+
 
