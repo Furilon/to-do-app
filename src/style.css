@@ -28,7 +28,7 @@ body {
     justify-content: space-evenly;
 }
 
-#header button {
+#header button, #itemFormContainer button, #projectFormContainer button {
     background-color: #3A3042;
     margin-right: 10px;
     color: #EDFFD9;
@@ -40,7 +40,7 @@ body {
                 color 0.2s ease-out 0.01s;
 }
 
-#header button:hover {
+#header button:hover, #itemFormContainer button:hover, #projectFormContainer button:hover{
     color: #3A3042;
     background-color: #EDFFD9;
     cursor: pointer;
@@ -193,12 +193,12 @@ button:hover {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    border: 2px solid #3A3042;
+    border: 3px solid #db9d47;
     padding: 20px;
     max-width: 250px;
     height: 200px;
-    background-color: #EDFFD9;
-    color: #3A3042;
+    background-color: #3A3042;
+    color: #EDFFD9;
     border-radius: 13px;
     top: 50%;
     left: 50%;
@@ -220,16 +220,16 @@ form {
 
 form input {
     margin-bottom: 8px;
-    border: 2px solid #3A3042;
-    background-color: #EDFFD9;
+    border: 2px solid #EDFFD9;
+    background-color: #3A3042;
     border-radius: 13px; 
     padding: 8px 13px;
-    color: #3A3042
+    color: #EDFFD9;
 }
 
 form input:focus {
-    background-color: #3A3042;
-    color:#EDFFD9
+    background-color: #EDFFD9;
+    color:#3A3042
 }
 
 
