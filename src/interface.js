@@ -157,7 +157,7 @@ const Todo = (() => {
         const items = project.getItems()
         items.forEach((item, i) => {
             const itemElem = itemDOM.createItem(item, i, _editItem)
-            itemElem.lastChild.addEventListener('click', removeItem)
+            itemElem.firstChild.addEventListener('click', removeItem)
             itemContainer.appendChild(itemElem)
         })
     }
@@ -184,7 +184,7 @@ const Todo = (() => {
                 itemID = itemContainer.lastChild.id + 1
             }
             const itemElem = itemDOM.createItem(item, itemID, _editItem)
-            itemElem.lastChild.addEventListener('click', removeItem)
+            itemElem.firstChild.addEventListener('click', removeItem)
             itemContainer.appendChild(itemElem)
         })
     }
