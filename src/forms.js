@@ -1,4 +1,20 @@
+const toggleHeaderButtons = () => {
+    const createProjectButton = document.getElementById('create-project')
+    const removeProjectButton = document.getElementById('remove-project')
+    const editProjectButton = document.getElementById('edit-project')
+    const createItemButton = document.getElementById('create-item')
+
+    // reverse whatever state of disability the buttons are in
+    createProjectButton.disabled = !createProjectButton.disabled
+    removeProjectButton.disabled = !removeProjectButton.disabled
+    editProjectButton.disabled = !editProjectButton.disabled
+    createItemButton.disabled = !createItemButton.disabled
+}
+
 export const createProjectForm = (addProject) => {
+    // make user unable to open other forms
+    toggleHeaderButtons()
+
     // create a form container
     const container = document.createElement('div')
     container.id = 'projectFormContainer'
@@ -12,7 +28,7 @@ export const createProjectForm = (addProject) => {
 
     const title = document.createElement('input')
     title.setAttribute('type', 'text')
-    title.setAttribute('placeholder', 'E.g., Inbox')
+    title.setAttribute('placeholder', 'Title')
     title.setAttribute('required', 'true')
     title.id = 'projectTitle'
 
@@ -28,6 +44,9 @@ export const createProjectForm = (addProject) => {
         // remove the form from the screen
         const body = document.querySelector('body')
         body.removeChild(e.target.parentNode.parentNode)
+
+        // turn other form buttons on
+        toggleHeaderButtons()
     })
 
     // close button closes the form
@@ -38,6 +57,9 @@ export const createProjectForm = (addProject) => {
         // remove the form from the screen
         const body = document.querySelector('body')
         body.removeChild(e.target.parentNode)
+
+        // turn other form buttons on
+        toggleHeaderButtons()
     })
 
     form.appendChild(title)
@@ -52,6 +74,9 @@ export const createProjectForm = (addProject) => {
 }
 
 export const editProjectForm = (oldTitle, editTitle, titleElem) => {
+    // turn off other form buttons
+    toggleHeaderButtons()
+
     // create a form container
     const container = document.createElement('div')
     container.id = 'projectFormContainer'
@@ -83,6 +108,9 @@ export const editProjectForm = (oldTitle, editTitle, titleElem) => {
         // remove the form from the screen
         const body = document.querySelector('body')
         body.removeChild(e.target.parentNode.parentNode)
+
+        // turn other form buttons on
+        toggleHeaderButtons()
     })
 
     // close button closes the form
@@ -93,6 +121,9 @@ export const editProjectForm = (oldTitle, editTitle, titleElem) => {
         // remove the form from the screen
         const body = document.querySelector('body')
         body.removeChild(e.target.parentNode)
+
+        // turn other form buttons on
+        toggleHeaderButtons()
     })
 
     form.appendChild(title)
@@ -107,6 +138,9 @@ export const editProjectForm = (oldTitle, editTitle, titleElem) => {
 }
 
 export const createItemForm = (addItem) => {
+    // turn other form buttons off
+    toggleHeaderButtons()
+
     // create the form container
     const container = document.createElement('div')
     container.id = 'itemFormContainer'
@@ -120,13 +154,13 @@ export const createItemForm = (addItem) => {
 
     const title = document.createElement('input')
     title.setAttribute('type', 'text')
-    title.setAttribute('placeholder', 'E.g., Call Dad')
+    title.setAttribute('placeholder', 'Title')
     title.setAttribute('required', 'true')
     title.id = 'itemTitle'
 
     const due = document.createElement('input')
     due.setAttribute('type', 'textarea')
-    due.setAttribute('placeholder', 'E.g., Tonight')
+    due.setAttribute('placeholder', 'Due date')
     due.setAttribute('required', 'true')
     due.id = 'itemDue'
 
@@ -150,6 +184,9 @@ export const createItemForm = (addItem) => {
         // remove the form from the screen
         const body = document.querySelector('body')
         body.removeChild(e.target.parentNode.parentNode)
+
+        // turn other form buttons on
+        toggleHeaderButtons()
     })
 
     // close button closes the form
@@ -160,6 +197,9 @@ export const createItemForm = (addItem) => {
         // remove the form from the screen
         const body = document.querySelector('body')
         body.removeChild(e.target.parentNode)
+
+        // turn other form buttons on
+        toggleHeaderButtons()
     })
 
     form.appendChild(title)
@@ -176,6 +216,9 @@ export const createItemForm = (addItem) => {
 }
 
 export const editItemForm = (oldInfo, editFuncs, itemInfoDOM) => {
+    // turn other form buttons off
+    toggleHeaderButtons()
+
     // create the form container
     const container = document.createElement('div')
     container.id = 'itemFormContainer'
@@ -231,6 +274,9 @@ export const editItemForm = (oldInfo, editFuncs, itemInfoDOM) => {
         // remove the form from the screen
         const body = document.querySelector('body')
         body.removeChild(e.target.parentNode.parentNode)
+
+        // turn other form buttons on
+        toggleHeaderButtons()
     })
 
     // close button closes the form
@@ -241,6 +287,9 @@ export const editItemForm = (oldInfo, editFuncs, itemInfoDOM) => {
         // remove the form from the screen
         const body = document.querySelector('body')
         body.removeChild(e.target.parentNode)
+
+        // turn other form buttons on
+        toggleHeaderButtons()
     })
 
     form.appendChild(title)
